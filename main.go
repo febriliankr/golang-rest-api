@@ -7,6 +7,7 @@ import (
 	"golang-rest-api/models"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
@@ -166,5 +167,6 @@ func main() {
 	router.HandleFunc("/api/books/{id}", deleteBook).Methods("DELETE")
 
 	// set our port address
-	log.Fatal(http.ListenAndServe(":8000", router))
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
